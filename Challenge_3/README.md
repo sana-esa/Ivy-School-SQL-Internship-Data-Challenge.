@@ -23,11 +23,11 @@ challenge3_logistics_analysis.sql — Final optimized SQL solution
 
 Day 3 - Solution.sql — Working draft queries
 
-challenge3_carrier_summary.png — Screenshot: Total orders and average shipping cost
+challenge3_carrier_summary.png — Total orders and average shipping cost
 
-challenge3_lead_time_analysis.png — Screenshot: Lead time comparison
+challenge3_lead_time_analysis.png — Lead time comparison
 
-challenge3_costliest_orders.png — Screenshot: Top 20 costliest orders
+challenge3_costliest_orders.png — Top 20 costliest orders
 
 📸 Output Snapshots
 
@@ -44,4 +44,10 @@ challenge3_costliest_orders.png — Screenshot: Top 20 costliest orders
 
 This challenge helped me practice advanced SQL calculations, date differences, and percentage-based analysis.
 I learned how to compare performance against overall averages and calculate operational cost metrics that support logistics decision-making.
+
+🔹 Challenge 3 – Logistics Operations
+
+Analyzed shipping performance and cost-to-serve metrics using SQL.
+Includes carrier efficiency stats, lead-time analysis, and cost insights.
+View Folder ➜
 
