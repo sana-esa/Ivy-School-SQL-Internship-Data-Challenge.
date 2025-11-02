@@ -24,4 +24,4 @@ Each folder `Challenge_1`, `Challenge_2`, `Challenge_3`, `Challenge_4` contains:
 4. See `images/` for example outputs.
 
 ## Contact
-Sana Khatoon — LinkedIn: <your LinkedIn URL> — Email: <your email>
+Sana Khatoon — LinkedIn: https://www.linkedin.com/in/sana-esa-928070260/> — Email: <sanaesa5889@gmail.com>
