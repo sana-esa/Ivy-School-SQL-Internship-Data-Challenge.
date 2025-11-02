@@ -1,33 +1,53 @@
-# vy-School-SQL-Challenge.
-SQL Solutions for the Ivy School Data Challenge.
-# 🚀 Day 1: Marketing Snapshots - Retail Data Challenge
+# Challenge 1 — Marketing Snapshots
 
-Welcome to the **Ivy School SQL Challenge** repository!
-
-This project documents my journey through the data challenge, showcasing my SQL skills and analytical approach.
-
-## 🎯 Day 1 Challenge: Marketing Snapshots
-
-**Purpose:** The Marketing team requested four simple, actionable snapshots from a retail database.
-
-### Deliverables:
-* SQL queries for all 4 questions.
-* **Result Screenshots** (To be added once generated).
-
-### Files:
-* **`Day 1 - Solution.sql`**: Contains the final, clean, and optimized SQL queries.
-* **`Sana Khatoon_Challenage_1.sql`**: My initial working file, which includes alternative methods like using **`WITH` clauses (CTEs)** and **`CASE WHEN`** statements for comparison.
-
-### Key Questions & SQL Insights:
-
-| Q No. | Business Question | SQL Concept Used | Key Analytical Decision |
-| :---: | :--- | :--- | :--- |
-| **Q1** | Active Products as a % of total products | Conditional Aggregation (`IF/SUM`) | Calculated the exact percentage of products marked active. |
-| **Q2** | Classify Stores (Old/New) and count them | Conditional Logic (`IF/CASE`) | Classified stores opened **before 2023 as 'Old'**. |
-| **Q3** | Top 5 cities by customer count + store classification | Joins (`INNER JOIN`), Ranking (`LIMIT`) | Joined `customers` and `stores` to link customer data with store opening status. |
-| **Q4** | Average order line value (`AVG(line_amount)`) | Aggregation (`AVG`), Filtering (`WHERE`) | **Crucial:** Used **`WHERE status <> "Cancelled"`** to ensure the average is based only on *successful* sales, providing a true business metric. |
-
-### 💡 My Key Learning:
-The difference between my two files highlights a key learning: analytical rigor matters. For Q4, filtering out 'Cancelled' orders gives a realistic sales average, which is much more valuable to the Marketing team than a raw, unfiltered average.
+**Repository:** Ivy School SQL Challenge  
+**Purpose:** SQL Solutions for the Ivy School Data Challenge
 
 ---
+
+## 🚀 Day 1: Marketing Snapshots — Retail Data Challenge
+
+This project documents my SQL journey through the challenge, showcasing analytical skills and solutions for Marketing’s quick insights.
+
+### 🎯 Challenge Overview
+The Marketing team requested **four simple, actionable snapshots** from a retail database.  
+
+**Deliverables:**
+- Optimized SQL queries (`challenge1_sales_summary.sql`)  
+- Initial working file with alternative methods (`Sana_Khatoon_Challenge1.sql`)  
+- Result screenshots (see below)
+
+---
+
+## Key Questions & SQL Concepts
+
+| Q No. | Business Question | SQL Concept Used | Key Analytical Decision |
+|-------|-----------------|-----------------|------------------------|
+| Q1 | Active Products as % of total products | Conditional Aggregation (IF/SUM) | Calculated exact % of active products |
+| Q2 | Classify Stores (Old/New) and count | Conditional Logic (IF/CASE) | Stores opened before 2023 classified as 'Old' |
+| Q3 | Top 5 cities by customer count + store classification | Joins, Ranking (LIMIT) | Linked customer and store data for classification |
+| Q4 | Average order line value (AVG(line_amount)) | Aggregation (AVG), Filtering (WHERE) | Filtered out "Cancelled" orders for accurate average |
+
+---
+
+## 📊 Key Results
+
+- **Monthly sales summary (top revenue months):**  
+  ![Monthly Sales](images/Monthly_sales_summary.png)
+
+- **Marketing snapshot:**  
+  ![Marketing Snapshot](images/Marketing_snapshot.png)
+
+---
+
+## 💡 Key Learning
+- Filtering cancelled orders gives realistic business metrics.  
+- Using alternative SQL approaches (CTEs, CASE WHEN) improved understanding of analytical options.  
+- Small adjustments in logic can create much more actionable insights for business teams.
+
+---
+
+## Files
+- `challenge1_sales_summary.sql` — Final optimized queries  
+- `Sana_Khatoon_Challenge1.sql` — Initial working file with alternative approaches  
+- `images/` — Screenshots of results
