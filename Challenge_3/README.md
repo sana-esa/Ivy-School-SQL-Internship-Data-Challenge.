@@ -1,21 +1,47 @@
-## Challenge 3
-This folder contains all files and solutions for Challenge 3.
+🚚 Challenge 3: Logistics Operations
+🧩 Objective
 
-## Challenge 3: SQL Data Optimization
+This challenge focuses on analyzing logistics performance using SQL. The goal is to understand shipping efficiency, carrier performance, and cost structure through data-driven insights.
 
-### 📘 Objective
-This challenge focuses on improving query performance and analyzing dataset efficiency using SQL techniques.
+📊 Key Tasks
 
-### 📂 Files Included
-- **query.sql** – main SQL file with optimized queries  
-- **result.csv** – query output and test results  
-- **notes.docx** – explanation and key takeaways  
+Carrier Summary – Find total orders and average shipping cost for each carrier.
 
-### 🧠 Key Learnings
-- Applied filters and joins for faster data retrieval  
-- Used indexing to improve query speed  
-- Learned how to identify and remove redundant steps in queries  
+Lead Time Comparison – Calculate the percentage of orders with shipping lead time above and below the overall average.
 
-### 🏁 Outcome
-Improved query execution time and cleaner data output with accurate results.
+Cost-to-Serve Analysis – Determine the total cost-to-serve per order (shipping_cost + (unit_cost * quantity)) and list the top 20 costliest orders.
+
+🧮 Tools Used
+
+MySQL for SQL querying and analysis
+
+Excel for result validation and export
+
+📂 Files in This Folder
+
+challenge3_logistics_analysis.sql — Final optimized SQL solution
+
+Day 3 - Solution.sql — Working draft queries
+
+challenge3_carrier_summary.png — Screenshot: Total orders and average shipping cost
+
+challenge3_lead_time_analysis.png — Screenshot: Lead time comparison
+
+challenge3_costliest_orders.png — Screenshot: Top 20 costliest orders
+
+📸 Output Snapshots
+
+1️⃣ Total Orders & Average Shipping Cost
+
+
+2️⃣ Lead Time Comparison
+
+
+3️⃣ Top 20 Costliest Orders
+
+
+💡 Summary
+
+This challenge helped me practice advanced SQL calculations, date differences, and percentage-based analysis.
+I learned how to compare performance against overall averages and calculate operational cost metrics that support logistics decision-making.
 
