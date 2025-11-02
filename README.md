@@ -1,42 +1,47 @@
-# Ivy School SQL Internship Data Challenge
+Ivy School SQL Internship Data Challenge
 
-This repository contains my solutions to the Ivy School SQL Internship Data Challenge.
-Each folder `Challenge_1`, `Challenge_2`, `Challenge_3`, `Challenge_4` contains:
-- SQL scripts
-- A short `README.md` explaining approach and assumptions
-- Example outputs in `images/` (screenshots or CSV exports)
+This repository contains my solutions to the Ivy School SQL Internship Data Challenge. Each folder (Challenge_1, Challenge_2, Challenge_3, Challenge_4) contains:
 
-## Structure
-- `Challenge_1/` — Title: e.g., Sales Analysis
-- `Challenge_2/` — Title: e.g., Customer Cohort Analysis
-- `Challenge_3/` — Title: e.g., Product Performance
-- `Challenge_4/` — Title: e.g., Performance Trends
+SQL scripts
 
-## Tools
-- SQL (MySQL / PostgreSQL / SQLite) — mention which one you used
-- Git / GitHub for version control
-- (Optional) Excel for result screenshots
+A short README.md explaining approach and assumptions
 
-## How to view
-1. Open the folder for each challenge.
-2. Read the `README.md` inside the folder for details.
-3. Open `.sql` files to view queries.
-4. See `images/` for example outputs.
+Example outputs in images/ (screenshots or CSV exports)
 
-   ## Key Results
+📂 Folder Structure & Titles
+Folder	Challenge Title
+Challenge_1	Marketing Snapshots
+Challenge_2	Category Performance Analysis
+Challenge_3	Logistics Operations
+Challenge_4	Performance Trends
+🧰 Tools Used
 
-- Monthly sales summary (top revenue months):
-  ![Monthly Sales](images/Monthly_sales_summary.png)
+SQL (MySQL) — for querying and analysis
 
-- Total sales per category:
-  ![Total Sales](images/Total_sales_per_category.png)
+Git / GitHub — for version control
 
-- Top 5 products per category:
-  ![Top Products](images/Top5_products.png)
+Excel — optional, for reviewing and exporting results
 
-- Marketing snapshot:
-  ![Marketing Snapshot](images/Marketing_snapshot.png)
+📖 How to View
 
+Open the folder for each challenge.
 
-## Contact
-Sana Khatoon — LinkedIn: https://www.linkedin.com/in/sana-esa-928070260/> — Email: <sanaesa5889@gmail.com>
+Read the README.md inside each folder for challenge details.
+
+Open .sql files to view the queries.
+
+See images/ for example outputs and visual summaries.
+
+📊 Key Results
+Challenge	Result Snapshot
+Challenge 1	Marketing Snapshot
+Challenge 2	Total Sales per Category & Top Products
+Challenge 3	Carrier Summary, Lead Time Analysis, Cost-to-Serve
+Challenge 4	Monthly Sales & Average Order Value (AOV) Trends
+📬 Contact
+
+Sana Khatoon
+
+LinkedIn: https://www.linkedin.com/in/sana-esa-928070260/
+
+Email: sanaesa5889@gmail.com
