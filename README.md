@@ -23,5 +23,20 @@ Each folder `Challenge_1`, `Challenge_2`, `Challenge_3`, `Challenge_4` contains:
 3. Open `.sql` files to view queries.
 4. See `images/` for example outputs.
 
+   ## Key Results
+
+- Monthly sales summary (top revenue months):
+  ![Monthly Sales](images/Monthly_sales_summary.png)
+
+- Total sales per category:
+  ![Total Sales](images/Total_sales_per_category.png)
+
+- Top 5 products per category:
+  ![Top Products](images/Top5_products.png)
+
+- Marketing snapshot:
+  ![Marketing Snapshot](images/Marketing_snapshot.png)
+
+
 ## Contact
 Sana Khatoon — LinkedIn: https://www.linkedin.com/in/sana-esa-928070260/> — Email: <sanaesa5889@gmail.com>
