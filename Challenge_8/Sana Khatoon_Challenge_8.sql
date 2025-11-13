@@ -1,0 +1,71 @@
+use retail_db;
+
+/*-- 1) compute add_to_cart counts per Product brand*/
+
+select JSON_EXTRACT(event_json, '$.product_id') as product_id,COUNT(*) as add_to_cart_count
+from web_events
+where event_type = 'add_to_cart'
+    and event_json is not null
+    and event_json <> '{}'
+group by product_id
+order by add_to_cart_count desc;
+
+/*-- 2) Create a Funnel: page_view → add_to_cart → checkout → purchase rates per campaign. 
+(Funnel like representation of the query result)*/
+
+with UserFunnelSteps as (
+    select customer_id,utm_campaign,
+        min(case when event_type = 'add_to_cart' then event_datetime end) as add_to_cart_ts,
+        min(case when event_type = 'checkout' then event_datetime end) as checkout_ts,
+        min(case when event_type = 'purchase' then event_datetime end) as purchase_ts
+    from web_events
+    where customer_id is not null
+        and event_type in ('add_to_cart', 'checkout', 'purchase')
+    group by customer_id, utm_campaign
+)
+select utm_campaign,
+    sum(case when add_to_cart_ts is not null then 1 else 0 end) as A_Users_Add_to_Cart,
+    sum(case when checkout_ts >= add_to_cart_ts and add_to_cart_ts is not null then 1 else 0 end) as B_Users_Checkout,
+    sum(case when purchase_ts >= checkout_ts and checkout_ts is not null then 1 else 0 end) as C_Users_Purchase,
+    round(
+        cast(sum(case when checkout_ts >= add_to_cart_ts and add_to_cart_ts is not null then 1 else 0 end) as real) * 100 / nullif(sum(case when add_to_cart_ts is not null then 1 else 0 end), 0)
+    , 2) as "ATC->Checkout Rate (%)",
+   round(
+        cast(sum(case when purchase_ts >= checkout_ts and checkout_ts is not null then 1 else 0 end) as real) * 100 / nullif(sum(case when checkout_ts >= add_to_cart_ts and add_to_cart_ts is not null then 1 else 0 end), 0)
+    , 2) as "Checkout->Purchase Rate (%)"
+from UserFunnelSteps
+group by utm_campaign
+order by "ATC->Checkout Rate (%)" desc;
+
+/*-- 3) Create a per-user feature table: last_event date, no.of sessions in past 30 days,
+ add_to_carts in past 30 days, purchases in past 30 days.*/
+ 
+with RefDate as (
+select MAX(STR_TO_DATE(event_datetime, '%d-%m-%Y %H:%i')) as MaxDateTime
+    from web_events
+),
+UserActivity as (
+    select customer_id,
+        STR_TO_DATE(event_datetime, '%d-%m-%Y %H:%i') as event_datetime_dt,
+        session_id,
+        event_type,
+        (select MaxDateTime from RefDate) as RefDateTime
+       from web_events
+      where customer_id is not null
+)
+select t1.customer_id,
+   DATE(MAX(t1.event_datetime_dt)) AS last_event_date,COUNT(DISTINCT CASE
+        WHEN t1.event_datetime_dt >= DATE_SUB(t1.RefDateTime, INTERVAL 30 DAY) THEN t1.session_id
+        END) AS sessions_30d,
+        COUNT(CASE
+        WHEN t1.event_type = 'add_to_cart'
+        AND t1.event_datetime_dt >= DATE_SUB(t1.RefDateTime, INTERVAL 30 DAY) THEN 1
+        END) AS add_to_carts_30d,
+
+    COUNT(CASE
+        WHEN t1.event_type = 'purchase'
+        AND t1.event_datetime_dt >= DATE_SUB(t1.RefDateTime, INTERVAL 30 DAY) THEN 1
+        END) AS purchases_30d
+        from UserActivity t1
+        group by t1.customer_id
+        order by t1.customer_id;
