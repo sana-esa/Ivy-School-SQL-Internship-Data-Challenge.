@@ -40,7 +40,7 @@ File Name
 
 Description
 
-Sana Khatoon_Challenge_8.sql
+Web_Event_Analytics_SQL_Challenge
 
 Contains the complete, structured MySQL/SQL solutions for all three objectives.
 
