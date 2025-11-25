@@ -1,0 +1,87 @@
+use retail_db;
+
+WITH
+-- 1. Identify the Top 20 Products by Total Revenue (Hero Products)
+TopHeroProducts as (
+    select oi.product_id
+    from order_items oi
+    group by oi.product_id
+    order by SUM(oi.line_amount) desc
+    limit 20
+),
+
+-- 2. Calculate the total value and product count for every single order (basket).
+OrderSummary as (
+    select oi.order_id,
+        SUM(oi.line_amount) as total_basket_value,
+        COUNT(DISTINCT oi.product_id) as total_products_in_order
+    from order_items oi
+    group by oi.order_id
+),
+
+-- 3. Establish the baseline: Average basket value when the Hero Product is purchased ALONE (1-item order).
+AloneBaseline as (
+    select tph.product_id as hero_product_id,
+        avg(os.total_basket_value) as avg_basket_value_alone
+    from TopHeroProducts tph
+    join
+        order_items oi on tph.product_id = oi.product_id
+    join
+        OrderSummary os on  oi.order_id = os.order_id
+    where os.total_products_in_order = 1
+    group by tph.product_id
+),
+
+-- 4. Identify Hero Product (t1) and co-purchased item (t2) pairs only in MULTI-ITEM orders (for co-occurrence).
+HeroAndOtherProducts as (
+    select t1.order_id,
+        t1.product_id as hero_product_id,
+        t2.product_id as other_product_id
+    from order_items t1
+    join order_items t2 on t1.order_id = t2.order_id
+    join TopHeroProducts tph on t1.product_id = tph.product_id
+    where t1.product_id <> t2.product_id
+    group by t1.order_id, t1.product_id, t2.product_id
+),
+
+-- 5. Group the co-purchased items into a canonical combo string for each (order_id, hero_product) pair,
+--    and attach the total basket value for that specific order.
+ComboCoOccurrence as (
+    select hop.hero_product_id,hop.order_id,
+        GROUP_CONCAT(hop.other_product_id ORDER BY hop.other_product_id SEPARATOR ', ') AS co_purchase_product_ids,
+        os.total_basket_value
+    from HeroAndOtherProducts hop
+    join
+        OrderSummary os on hop.order_id = os.order_id
+    group by hop.hero_product_id,
+        hop.order_id,
+        os.total_basket_value
+)
+
+-- 6. Final Aggregation: Calculate frequency and profitability lift for each specific combo.
+select p.product_name as  hero_product_name,
+    gc.co_purchase_product_ids,
+    COUNT(gc.order_id) as support_count,
+    ROUND(avg(gc.total_basket_value), 2) as  avg_basket_value_for_combo, 
+    ROUND(ab.avg_basket_value_alone, 2) as avg_basket_value_alone,      
+
+    ROUND(
+        (
+            (avg(gc.total_basket_value) - ab.avg_basket_value_alone)
+            / NULLIF(ab.avg_basket_value_alone, 0)
+        ) * 100
+    , 2) as pct_revenue_lift_over_alone 
+from ComboCoOccurrence gc
+join
+    products p on gc.hero_product_id = p.product_id
+left join
+    AloneBaseline ab on gc.hero_product_id = ab.hero_product_id
+group by
+    p.product_name,
+    gc.co_purchase_product_ids,
+    ab.avg_basket_value_alone
+having (avg(gc.total_basket_value) - ab.avg_basket_value_alone) > 0
+order by
+    pct_revenue_lift_over_alone desc,
+    support_count desc
+limit 100;
